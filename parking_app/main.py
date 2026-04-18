@@ -1,7 +1,13 @@
-from fastapi import FastAPI
-from parking_app.db.db import Base, engine
+import sys
+from pathlib import Path
 
-from parking_app.api import user, parking, booking
+# Добавляем корень проекта в путь, чтобы можно было импортировать parking_app
+ROOT_DIR = Path(__file__).parent.parent  # это папка "Parking"
+sys.path.append(str(ROOT_DIR))
+from fastapi import FastAPI
+from .db.db import Base, engine
+from .api import user, parking, booking
+
 
 Base.metadata.create_all(bind=engine)
 
